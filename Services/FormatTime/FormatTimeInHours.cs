@@ -7,7 +7,8 @@ namespace Curso2_BuenasPracticas.Services.FormatTime
     {
         public string GetTimeFormat(TimeSpan time)
         {
-            return string.Format("{0:%h} hora(s)", time);
+            int hours = (int)Math.Ceiling(Math.Abs(time.TotalHours));
+            return string.Format("{0} hora(s)", hours);
         }
     }
 }

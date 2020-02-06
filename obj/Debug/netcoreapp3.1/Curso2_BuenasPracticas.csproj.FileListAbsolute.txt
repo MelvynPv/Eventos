@@ -8,3 +8,4 @@ C:\Users\melvyn.pena\source\repos\Curso2Ejercicio1_BuenasPracticas\Curso2_Buenas
 C:\Users\melvyn.pena\source\repos\Curso2Ejercicio1_BuenasPracticas\Curso2_BuenasPracticas\obj\Debug\netcoreapp3.1\Curso2_BuenasPracticas.AssemblyInfo.cs
 C:\Users\melvyn.pena\source\repos\Curso2Ejercicio1_BuenasPracticas\Curso2_BuenasPracticas\obj\Debug\netcoreapp3.1\Curso2_BuenasPracticas.dll
 C:\Users\melvyn.pena\source\repos\Curso2Ejercicio1_BuenasPracticas\Curso2_BuenasPracticas\obj\Debug\netcoreapp3.1\Curso2_BuenasPracticas.pdb
+C:\Users\melvyn.pena\source\repos\Curso2Ejercicio1_BuenasPracticas\Curso2_BuenasPracticas\obj\Debug\netcoreapp3.1\Curso2_BuenasPracticas.csprojAssemblyReference.cache

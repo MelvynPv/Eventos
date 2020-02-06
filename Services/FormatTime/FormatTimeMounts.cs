@@ -8,7 +8,8 @@ namespace Curso2_BuenasPracticas.Services.FormatTime
         public string GetTimeFormat(TimeSpan time)
         {
             int mounts = Math.Abs(time.Days) / 30;
-            return string.Format("{0} meses", mounts);
+
+            return string.Format("{0} mes(es)", mounts);
         }
     }
 }

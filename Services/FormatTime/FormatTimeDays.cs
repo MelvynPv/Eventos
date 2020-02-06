@@ -7,7 +7,8 @@ namespace Curso2_BuenasPracticas.Services.FormatTime
     {
         public string GetTimeFormat(TimeSpan time)
         {
-            return string.Format("{0:%d} Dias", time);
+            int days = (int)Math.Ceiling(Math.Abs(time.TotalDays));
+            return string.Format("{0} Dia(s)", days);
         }
     }
 }

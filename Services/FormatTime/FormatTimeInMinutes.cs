@@ -9,7 +9,9 @@ namespace Curso2_BuenasPracticas.Services.FormatTime
     {
         public string GetTimeFormat(TimeSpan time)
         {
-             return string.Format("{0:%m} minutos", time);
+            int minutes = (int)Math.Ceiling(time.TotalMinutes);
+
+            return string.Format("{0} minutos", minutes);
         }
     }
 }
