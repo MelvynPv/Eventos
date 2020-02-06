@@ -1,36 +1,37 @@
-﻿using Curso2_BuenasPracticas.Models;
+﻿using Curso2_BuenasPracticas.Factorys;
+using Curso2_BuenasPracticas.Models;
 using Curso2_BuenasPracticas.Services;
+using Curso2_BuenasPracticas.Services.ConvertToEntity.Interfaces;
 using Curso2_BuenasPracticas.Services.Interfaces;
 using Curso2_BuenasPracticas.Utils;
 using System;
-using System.IO;
 
 namespace Curso2_BuenasPracticas
 {
     class Program
     {
-        static readonly string textFile = @"C:\Temp\Data\eventos.txt";
         static void Main(string[] args)
         {
-            EventEntityService eventEntityService = new EventEntityService();
+            ServicesFactory serviceFactory = new ServicesFactory();
+            IConvertToEventEntity convert = serviceFactory.GetConvert("file");
+            IMessageFormat formatMessage;
+            ITimeFormat timeFormat;
 
-            if (File.Exists(textFile))
+            foreach (EventEntity eventEntity in convert.ConvertToEventEntity())
             {
-                // Read entire text file content in one string    
-                string text = File.ReadAllText(textFile);
+                formatMessage = serviceFactory.GetFormatMessage(
+                    DateTimeUtilities.DateIsPreviousToToday(eventEntity.DateStart));
 
-                foreach (EventEntity eventEntity in eventEntityService.GetEventEntities(text))
-                {
-                    bool IsPass = eventEntity.DateStart.CompareTo(DateTime.Now) < 0;
-                    IMessageFormat formatMessage = eventEntityService.GetFormatMessage(IsPass);
-                    TimeFormat timeFormatEnum = eventEntityService.GetTimeEnum(eventEntity.DateStart);
-                    ITimeFormat timeFormat = eventEntityService.GetTimeFormat(timeFormatEnum);
-                    string message = formatMessage.CreateMessage(eventEntity, timeFormat);
+                timeFormat = serviceFactory.GetTimeFormat(
+                    DateTimeUtilities.GetTimeEnum(eventEntity.DateStart));
+
+                //se crea el mensaje.
+                string message = formatMessage.CreateMessage(eventEntity, timeFormat);
 
 
-                    Console.WriteLine(message);
-                }
+                Console.WriteLine(message);
             }
+
         }
     }
 }
