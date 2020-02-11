@@ -5,6 +5,7 @@ using Curso2_BuenasPracticas.Services.FormatMessage;
 using Curso2_BuenasPracticas.Services.FormatTime;
 using Curso2_BuenasPracticas.Services.Interfaces;
 using Curso2_BuenasPracticas.Utils;
+using System;
 
 namespace Curso2_BuenasPracticas.Factorys
 {
@@ -13,6 +14,7 @@ namespace Curso2_BuenasPracticas.Factorys
     /// </summary>
     public class ServicesFactory
     {
+        private readonly FileReaderFromPath fileReaderFormPath  = new FileReaderFromPath();
         public IMessageFormat GetFormatMessage(bool isPass)
         {
             if (isPass)
@@ -25,30 +27,23 @@ namespace Curso2_BuenasPracticas.Factorys
 
         public ITimeFormat GetTimeFormat(TimeFormat timeFormat)
         {
-            switch (timeFormat)
+            return timeFormat switch
             {
-                case TimeFormat.Minutos:
-                    return new FormatTimeInMinutes();
-                case TimeFormat.Horas:
-                    return new FormatTimeInHours();
-                case TimeFormat.Dias:
-                    return new FormatTimeDays();
-                case TimeFormat.Meses:
-                    return new FormatTimeMounts();
-                default:
-                    return new FormatTimeInMinutes();
-            }
+                TimeFormat.Minutos => new FormatTimeInMinutes(),
+                TimeFormat.Horas => new FormatTimeInHours(),
+                TimeFormat.Dias => new FormatTimeDays(),
+                TimeFormat.Meses => new FormatTimeMounts(),
+                _ => throw new ArgumentException("No se encentro la instancia del formato del mensaje"),
+            };
         }
 
         public IConvertToEventEntity GetConvert(string type)
         {
-            switch (type)
+            return type switch
             {
-                case "file":
-                    return new FileToEventEntity();
-                default:
-                    return null;
-            }
+                "file" => new FileToEventEntity(fileReaderFormPath, ',', '\n'),
+                _ => null,
+            };
         }
     }
 }

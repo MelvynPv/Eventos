@@ -5,17 +5,17 @@ namespace Curso2_BuenasPracticas.Utils
     /// <summary>
     /// Responsabilidad de facilidades con el manejo de las fechas.
     /// </summary>
-    static class DateTimeUtilities
+    public static class DateTimeUtilities
     {
         /// <summary>
         /// Obtiene el enumerador adecuado a la diferencia la lejanía de las fechas (con respecto a la actual).
         /// </summary>
-        /// <param name="dateTime">Fecha principal.</param>
+        /// <param name="dateEvent">Fecha principal.</param>
         /// <returns>Enumerador que indica que tan lejana están las dos fechas</returns>
-        public static TimeFormat GetTimeEnum(DateTime dateTime)
+        public static TimeFormat GetTimeEnum(DateTime dateEvent, DateTime dateActual)
         {
 
-            var time = dateTime.Subtract(DateTime.Now);
+            var time = dateEvent.Subtract(dateActual);
 
             if (Math.Abs(time.TotalMinutes) < 60)
             {
@@ -38,15 +38,15 @@ namespace Curso2_BuenasPracticas.Utils
         /// </summary>
         /// <param name="dateStart">Fecha deseada.</param>
         /// <returns>Indica si la fecha es anterior.</returns>
-        public static bool DateIsPreviousToToday(DateTime dateStart) 
+        public static bool DateIsPreviousToToday(DateTime dateStart, DateTime dateActual) 
         {
-            return dateStart.CompareTo(DateTime.Now) < 0;
+            return dateStart.CompareTo(dateActual) < 0;
         }
 
 
-        public static TimeSpan GetTimeDifferencDateToDateActual(DateTime dateStart) 
+        public static TimeSpan GetTimeDifferencDateToDateActual(DateTime dateStart, DateTime dateActual) 
         {
-            return dateStart.Subtract(DateTime.Now);
+            return dateStart.Subtract(dateActual);
         }
     }
 }

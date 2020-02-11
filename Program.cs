@@ -16,14 +16,14 @@ namespace Curso2_BuenasPracticas
             IConvertToEventEntity convert = serviceFactory.GetConvert("file");
             IMessageFormat formatMessage;
             ITimeFormat timeFormat;
-
+            DateTime dateActual = DateTime.Now;
             foreach (EventEntity eventEntity in convert.ConvertToEventEntity())
             {
                 formatMessage = serviceFactory.GetFormatMessage(
-                    DateTimeUtilities.DateIsPreviousToToday(eventEntity.DateStart));
+                    DateTimeUtilities.DateIsPreviousToToday(eventEntity.DateStart, dateActual));
 
                 timeFormat = serviceFactory.GetTimeFormat(
-                    DateTimeUtilities.GetTimeEnum(eventEntity.DateStart));
+                    DateTimeUtilities.GetTimeEnum(eventEntity.DateStart, dateActual));
 
                 //se crea el mensaje.
                 string message = formatMessage.CreateMessage(eventEntity, timeFormat);

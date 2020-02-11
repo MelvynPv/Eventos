@@ -17,7 +17,7 @@ namespace Curso2_BuenasPracticas.Services.FormatMessage
         /// <returns></returns>
         public string CreateMessage(IEventEntity eventEntity, ITimeFormat timeFormat)
         {
-            TimeSpan timeDifference = DateTimeUtilities.GetTimeDifferencDateToDateActual(eventEntity.DateStart);
+            TimeSpan timeDifference = DateTimeUtilities.GetTimeDifferencDateToDateActual(eventEntity.DateStart, new DateTime());
 
             return string.Format("{0} ocurrió hace {1}", eventEntity.Title, timeFormat.GetTimeFormat(timeDifference));
 
